@@ -2,22 +2,40 @@ package com.dev.domain;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import com.dev.domain.enuns.Priority;
 import com.dev.domain.enuns.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+@Entity
 public class OrderService {
-	 private Integer id;
-	 
-	 private LocalDateTime openingDate;
-	 
-	 private LocalDateTime closingDate;
-	 
-	 private Integer priority;
-	 
-	 private String observations;
-	 private Integer status;
-	 private Support support; 
-	 private Customer customer;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime openingDate;
+ 
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime closingDate;
+ 
+	private Integer priority;
+	private String observations;
+	private Integer status;
+	
+	@ManyToOne
+	@JoinColumn(name = "support_id")
+	private Support support; 
+	
+	@ManyToOne
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
  
 	public OrderService(Integer id, Priority priority,
 			String observations, Status status, Support support, Customer customer) {

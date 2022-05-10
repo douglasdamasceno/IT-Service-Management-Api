@@ -4,12 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 public class Customer extends Person implements Serializable{
+	
+	@OneToMany(mappedBy = "support")
 	private List<OrderService> listOrderServices = new ArrayList<>();
 
 	public Customer() {
