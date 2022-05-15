@@ -1,10 +1,9 @@
 package com.dev.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,9 +11,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Support extends Person{
+public class Support extends Person implements Serializable{
 //	@OneToMany
 //	private List<OrderService> listOrderServices = new ArrayList<>();
+	private static final long serialVersionUID = 1L;
 
 	public Support() {
 		super();

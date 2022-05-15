@@ -1,6 +1,9 @@
 package com.dev.services;
 
+import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,16 @@ public class SupportService {
 	private SupportRepository supportRepository;
 	
 	public Support findById(Integer id) {
-		Optional<Support> support = supportRepository.findById(id);
-		return support.orElse(null);
+		return supportRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Support ID not found"));
 	}
+	
+	public List<Support> findAll() {
+		return supportRepository.findAll();
+	}
+	
+	public Support save(Support userPostRequestBody) {
+		return supportRepository.save(userPostRequestBody);
+	}
+	
 }
