@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 import com.dev.domain.enuns.Priority;
 import com.dev.domain.enuns.Status;
@@ -26,6 +27,7 @@ public class OrderService {
 	private LocalDateTime closingDate;
  
 	private Integer priority;
+	@NotEmpty(message = "The field observations is required")
 	private String observations;
 	private Integer status;
 	

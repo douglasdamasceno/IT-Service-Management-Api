@@ -7,5 +7,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 public class BadRequestExceptionDetails extends ExceptionDetails{
+	private static final long serialVersionUID = 1L;
 
 }
