@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dev.domain.Customer;
@@ -32,7 +34,10 @@ public class OrderServiceService {
 				.orElseThrow(() -> new RuntimeException("OrderService ID not found"));
 	}
 	
-	public List<OrderService> findAll() {
+	public Page<OrderService> findAll(Pageable pageable) {
+		return orderServiceRepository.findAll(pageable);
+	}
+	public List<OrderService> findAllNonPageble() {
 		return orderServiceRepository.findAll();
 	}
 	
@@ -61,6 +66,11 @@ public class OrderServiceService {
 		orderService.setCustomer(customer);
 		orderService.setSupport(support);
 		
-		return orderService;
+		return orderServiceRepository.save(orderService);
+	}
+	
+	public OrderService update(@Valid OrderServiceDTO orderServiceDTO) {
+		findById(orderServiceDTO.getId());
+		return fromDTO(orderServiceDTO);
 	}
 }
